@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EntryFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Purchase Entry"
+                tools:ignore="MissingConstraints"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:layout_margin="10dp"
+                tools:layout_editor_absoluteX="11dp"
+                tools:layout_editor_absoluteY="29dp">
+
+            </TextView>
+
+
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="409dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="80dp"
+                android:text="Purchase Description"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/editName"
+                android:layout_width="414dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="purchase">
+
+            </EditText>
+
+            <TextView
+                android:id="@+id/purchasetype"
+                android:layout_width="423dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="30dp"
+                android:text="Purchase Type"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:layout_width="410dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="type">
+
+            </EditText>
+
+            <TextView
+
+                android:layout_width="409dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="30dp"
+                android:text="Amount"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/editamount"
+                android:layout_width="410dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="amount"
+                android:inputType="number">
+
+            </EditText>
+
+            <TextView
+                android:id="@+id/Gender"
+                android:layout_width="411dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="30dp"
+                android:text="Gender"
+                android:textSize="18sp"/>
+
+            <RadioGroup
+                android:id="@+id/GenderGroup"
+                android:layout_width="400dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/GenderGroupM"
+                    android:layout_width="80dp"
+                    android:layout_height="33dp"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/GenderGroupF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:text="Female" />
+                <RadioButton
+                    android:id="@+id/GenderGroupO"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:text="Other" />
+
+            </RadioGroup>
+
+
+            <TextView
+                android:id="@+id/Classlabel"
+                android:layout_width="409dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="30dp"
+                android:text="Class"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/editClass"
+                android:layout_width="410dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="budget">
+
+            </EditText>
+
+            <TextView
+                android:id="@+id/Majorlabel"
+                android:layout_width="409dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="30dp"
+                android:text="Major"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <EditText
+                android:id="@+id/editMajor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp">
+
+
+            </EditText>
+
+            <Button
+                android:id="@+id/save"
+                android:layout_width="136dp"
+                android:layout_height="match_parent"
+                android:onClick="clicksavedata"
+                android:text="Save">
+
+            </Button>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Cancel"
+                android:layout_marginTop="10dp"
+                android:onClick="cancelClick1">
+
+            </Button>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+</FrameLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android2="http://schemas.android.com/apk/res/android"
+    xmlns:android="https://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android2:layout_width="wrap_content"
+        android2:layout_height="match_parent"
+        android2:title="Account Preferences">
+    </PreferenceCategory>
+
+    <Preference android2:title="Name, Email, Class, etc"
+        android2:summary="UserProfile">
+        <intent android2:action="your.action.string"/>
+    </Preference>
+    <Preference android2:title="Google Pay "
+        android2:summary="Link the Google Pay">
+        <intent android2:action="your.action.string"/>
+    </Preference>
+
+
+    <PreferenceCategory
+        android2:layout_width="wrap_content"
+        android2:layout_height="match_parent"
+        android2:title="Additional Settings">
+    </PreferenceCategory>
+
+<!--    <ListPreference-->
+<!--        android2:defaultValue="@array/Unit_pref"-->
+<!--        android2:entries="@array/Unit_pref"-->
+<!--        android2:summary="Select the Units"-->
+<!--        android2:entryValues="@array/Unit_pref"-->
+<!--        android2:key= "list_pref"-->
+<!--        android2:title="Unit Preference" />-->
+
+    <EditTextPreference
+
+        android2:key="edit_text_preference_1"
+        android2:summary="Please enter your comments"
+        android2:selectAllOnFocus="true"
+        android2:singleLine="true"
+        android2:title="Comments" />
+
+    <PreferenceCategory
+        android2:layout_width="wrap_content"
+        android2:layout_height="match_parent"
+        android2:title="Misc.">
+
+    </PreferenceCategory>
+
+    <Preference android2:title="Webpage"
+        android2:summary="https://www.sfu.ca/computing.html">
+        <intent android2:action="android.intent.action.VIEW"
+            android2:data="https://www.sfu.ca/computing.html" />
+    </Preference>
+
+</PreferenceScreen>
