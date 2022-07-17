@@ -18,6 +18,13 @@
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/mipmap-anydpi-v26/logo_dolla.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/xml/preferences.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_analysis.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_entry.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_monthly.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_quaterly.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_yearly.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/tags_icons.xml" value="0.20742753623188406" />
       </map>
     </option>
   </component>
