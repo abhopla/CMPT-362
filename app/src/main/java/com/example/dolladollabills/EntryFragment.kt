@@ -72,7 +72,11 @@ class EntryFragment : Fragment() {
         val saveButton: Button = view.findViewById(R.id.entry_save_button)
         saveButton.setOnClickListener() { onSaveClick(view) }
 
+        val cancelButton: Button = view.findViewById(R.id.entry_cancel_button)
+        cancelButton.setOnClickListener() { onCancelClick(view) }
+
     }
+
 
     private fun initializeDatabase() {
         database = TransactionDatabase.getInstance(this.requireActivity())
@@ -116,6 +120,10 @@ class EntryFragment : Fragment() {
 
         val toast = Toast.makeText(this.requireActivity(), "Transaction added", Toast.LENGTH_SHORT)
         toast.show()
+    }
+
+    fun onCancelClick(view: View){
+        requireActivity().finish()
     }
 
 }

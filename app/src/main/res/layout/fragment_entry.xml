@@ -20,7 +20,6 @@
                 android:layout_height="wrap_content"
                 android:text="Transaction Entry"
                 tools:ignore="MissingConstraints"
-                android:textColor="@color/black"
                 android:textSize="25dp"
                 android:layout_margin="10dp">
             </TextView>
@@ -41,7 +40,7 @@
                 android:ems="10"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
-                android:hint="purchase">
+                android:hint="Purchase">
             </EditText>
 
             <TextView
@@ -60,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
-                android:hint="type">
+                android:hint="Type">
 
             </EditText>
 
@@ -79,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
-                android:hint="amount"
+                android:hint="Amount"
                 android:inputType="number">
 
             </EditText>
@@ -101,6 +100,8 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/entry_cancel_button"
+                    android:onClick="onCancelClick"
                     android:text="Cancel"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="20dp">
