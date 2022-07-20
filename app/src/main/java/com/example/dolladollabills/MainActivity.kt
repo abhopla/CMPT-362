@@ -11,7 +11,7 @@ import java.util.ArrayList
 class MainActivity : AppCompatActivity() {
     private lateinit var entryFragment: EntryFragment
     private lateinit var analysisFragment: AnalysisFragment
-    private lateinit var graphFragment: GraphFragment
+    private lateinit var goalFragment: GoalFragment
     private lateinit var extraFragment: ExtraFragment
     private lateinit var viewPager2: ViewPager2
     private lateinit var tabLayout: TabLayout
@@ -29,13 +29,13 @@ class MainActivity : AppCompatActivity() {
         tabLayout = findViewById(R.id.tab)
         entryFragment = EntryFragment()
         analysisFragment = AnalysisFragment()
-        graphFragment = GraphFragment()
+        goalFragment = GoalFragment()
         extraFragment = ExtraFragment()
 
         fragments = ArrayList()
         fragments.add(entryFragment)
         fragments.add(analysisFragment)
-        fragments.add(graphFragment)
+        fragments.add(goalFragment)
         fragments.add(extraFragment)
 
         fragmentStateAdapter = FragmentStateAdapter(this, fragments)
