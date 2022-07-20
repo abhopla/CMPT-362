@@ -3,33 +3,46 @@ package com.example.dolladollabills
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.view.WindowManager
+import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.dolladollabills.db.category.*
 import com.example.dolladollabills.db.transaction.*
 import kotlinx.coroutines.*
 import java.util.*
+import androidx.fragment.app.FragmentActivity
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-private lateinit var database: TransactionDatabase
-private lateinit var databaseDao: TransactionDatabaseDao
-private lateinit var repository: TransactionRepository
-private lateinit var viewModelFactory: TransactionViewModelFactory
+
+private var dialog = DollaDialog()
+
+private lateinit var transactionDatabase: TransactionDatabase
+private lateinit var transactionDatabaseDao: TransactionDatabaseDao
+private lateinit var transactionRepository: TransactionRepository
+private lateinit var transactionViewModelFactory: TransactionViewModelFactory
 private lateinit var transactionViewModel: TransactionViewModel
 
+private lateinit var categoryDatabase: CategoryDatabase
+private lateinit var categoryDatabaseDao: CategoryDatabaseDao
+private lateinit var categoryRepository: CategoryRepository
+private lateinit var categoryViewModelFactory: CategoryViewModelFactory
+private lateinit var categoryViewModel: CategoryViewModel
+
 private lateinit var descriptionEdit : EditText
-private lateinit var typeEdit : EditText
+private lateinit var typeSpin : Spinner
 private lateinit var amountEdit: EditText
+
+private var categoryList: MutableList<String> = mutableListOf()
 
 /**
  * A simple [Fragment] subclass.
@@ -48,7 +61,7 @@ class EntryFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        initializeDatabase()
+        initializeDatabases()
 
     }
 
@@ -58,31 +71,55 @@ class EntryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_entry, container, false)
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         finalizeViews(view)
         return view
     }
 
     private fun finalizeViews(view: View) {
         descriptionEdit = view.findViewById(R.id.entry_transaction_description_edit) as EditText
-        typeEdit = view.findViewById(R.id.entry_transaction_type_edit) as EditText
-        amountEdit = view.findViewById(R.id.entry_transaction_amount_edit) as EditText
+        typeSpin = view.findViewById(R.id.entry_transaction_type_spin) as Spinner
 
+        categoryViewModel.allCategoriesLiveData.observe(requireActivity()) { categories ->
+            categoryList = mutableListOf()
+            for (category: Category in categories) {
+                categoryList.add(category.name)
+                Log.d("WHYYY", category.name)
+            }
+            val dataAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, categoryList);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            typeSpin.adapter = dataAdapter
+        }
+
+        amountEdit = view.findViewById(R.id.entry_transaction_amount_edit) as EditText
         amountEdit.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
 
         val saveButton: Button = view.findViewById(R.id.entry_save_button)
         saveButton.setOnClickListener() { onSaveClick(view) }
 
+        val addCategoryButton: Button = view.findViewById(R.id.entry_add_category_button)
+        addCategoryButton.setOnClickListener() { onAddCategoryClick(view) }
     }
 
-    private fun initializeDatabase() {
-        database = TransactionDatabase.getInstance(this.requireActivity())
-        databaseDao = database.transactionDatabaseDao
-        repository = TransactionRepository(databaseDao)
-        viewModelFactory = TransactionViewModelFactory(repository)
+    private fun initializeDatabases() {
+        transactionDatabase = TransactionDatabase.getInstance(this.requireActivity())
+        transactionDatabaseDao = transactionDatabase.transactionDatabaseDao
+        transactionRepository = TransactionRepository(transactionDatabaseDao)
+        transactionViewModelFactory = TransactionViewModelFactory(transactionRepository)
         transactionViewModel = ViewModelProvider(
             requireActivity(),
-            viewModelFactory
+            transactionViewModelFactory
         )[TransactionViewModel::class.java]
+
+        categoryDatabase = CategoryDatabase.getInstance(this.requireActivity())
+        categoryDatabaseDao = categoryDatabase.categoryDatabaseDao
+        categoryRepository = CategoryRepository(categoryDatabaseDao)
+        categoryViewModelFactory = CategoryViewModelFactory(categoryRepository)
+        categoryViewModel = ViewModelProvider(
+            requireActivity(),
+            categoryViewModelFactory
+        )[CategoryViewModel::class.java]
+
     }
 
     companion object {
@@ -105,17 +142,30 @@ class EntryFragment : Fragment() {
             }
     }
 
-    fun onSaveClick(view: View) {
+    private fun onSaveClick(view: View) {
         val transaction = Transaction()
         transaction.amount = (amountEdit.text.toString().toDouble() * 100).toLong()
         transaction.description = descriptionEdit.text.toString()
-        transaction.category_id = 5L
+        transaction.category_id = typeSpin.selectedItemPosition.toLong()
         transaction.milliseconds = Calendar.getInstance().timeInMillis
 
         transactionViewModel.insert(transaction)
 
         val toast = Toast.makeText(this.requireActivity(), "Transaction added", Toast.LENGTH_SHORT)
         toast.show()
+    }
+
+
+    private fun onAddCategoryClick(view: View) {
+        val bundle = Bundle()
+        bundle.putInt(DollaDialog.DIALOG_KEY, DollaDialog.ADD_CATEGORY_DIALOG)
+        dialog.arguments = bundle
+        dialog.show((activity as FragmentActivity).supportFragmentManager, "category dialog")
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        Log.d("WHYYY", "VIEWSTATERESTORED")
     }
 
 }
