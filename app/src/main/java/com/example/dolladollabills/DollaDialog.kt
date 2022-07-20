@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
 import android.text.InputType
 import android.util.Log
 import android.view.View
@@ -94,7 +95,16 @@ class DollaDialog : DialogFragment() {
                 val category = Category()
                 category.name = editText.text.toString()
 
-                categoryViewModel.insert(category)
+
+
+                val handler = Handler();
+                handler.postDelayed(Runnable() {
+                    run() {
+                        categoryViewModel.insert(category)
+                    }
+                }, 100);
+
+
 
             }
 
