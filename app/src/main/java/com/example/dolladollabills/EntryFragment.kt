@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentActivity
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+
 private var dialog = DollaDialog()
 
 private lateinit var transactionDatabase: TransactionDatabase
@@ -77,7 +78,6 @@ class EntryFragment : Fragment() {
 
     private fun finalizeViews(view: View) {
         descriptionEdit = view.findViewById(R.id.entry_transaction_description_edit) as EditText
-
         typeSpin = view.findViewById(R.id.entry_transaction_type_spin) as Spinner
 
         categoryViewModel.allCategoriesLiveData.observe(requireActivity()) { categories ->
