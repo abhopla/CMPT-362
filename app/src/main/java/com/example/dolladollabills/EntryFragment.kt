@@ -168,8 +168,4 @@ class EntryFragment : Fragment() {
         Log.d("WHYYY", "VIEWSTATERESTORED")
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 }

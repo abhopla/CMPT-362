@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.137" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/drawable-v24/logonew.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/drawable/gradient_bg.xml" value="0.1" />
@@ -23,6 +22,7 @@
         <entry key="app/src/main/res/layout/adapter_transaction.xml" value="0.2609375" />
         <entry key="app/src/main/res/layout/edit_text_dialog.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/fragment_entry.xml" value="0.18" />
+        <entry key="..\:/Users/user/Documents/DollaDollaBills/CMPT-362/app/src/main/res/layout/fragment_entry.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
