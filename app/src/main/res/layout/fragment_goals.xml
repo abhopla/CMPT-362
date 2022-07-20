@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GraphFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    android:orientation="vertical"
+    tools:context=".GoalFragment">
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text ="Your Goals"
+            android:id="@+id/yourgoal"
+            android:textSize="40dp"/>
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="15dp"-->
+<!--            android:layout_below = "@id/yourgoal"-->
+<!--            android:text="Budget Cap Tracker "/>-->
+
+
+
+        <ListView
+            android:id="@+id/goallist"
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/newgoal"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:onClick="onGoalSet"
+                android:text = "Add Goal "/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</ScrollView>

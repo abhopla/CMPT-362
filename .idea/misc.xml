@@ -10,10 +10,16 @@
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/drawable/logo_dolla_background.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/activity_main.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/adapter_category.xml" value="0.275" />
+        <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/dialogue_goals.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/fragment_analysis.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/fragment_entry.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/fragment_extra.xml" value="0.1" />
+        <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/fragment_goals.xml" value="0.275" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/fragment_graph.xml" value="0.1" />
+        <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/goal_dialogue.xml" value="0.12552083333333333" />
+        <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/goal_entry.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/goal_list_adapter.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/tags_icons.xml" value="0.13323201621073963" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
