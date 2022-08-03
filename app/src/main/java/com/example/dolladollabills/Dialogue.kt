@@ -9,8 +9,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import com.example.dolladollabills.GoalFragment
 import kotlinx.coroutines.InternalCoroutinesApi
+
 
 private lateinit var editTextt: EditText
 
@@ -39,21 +39,23 @@ class Dialogue : DialogFragment(), DialogInterface.OnClickListener {
         val view: View = requireActivity().layoutInflater.inflate(R.layout.goal_dialogue, null)
         editTextt = view.findViewById(R.id.edit_goal)
         builder.setView(view)
-        builder.setTitle("Comment")
-
+        builder.setTitle("Enter Your Budget Goal")
+//        val parentgoal: GoalFragment =
+//            parentFragment as GoalFragment
         builder.setPositiveButton("ok") { dialog, which ->
             if (editTextt.text != null) {
                 val tesstt = editTextt.text.toString()
-                println("Debug: ${tesstt}   ")
-                (context as GoalFragment).onGoalSet(tesstt)
+
+                GoalFragment.onGoalSet( tesstt)
+
             } else {
-                (context as GoalFragment).onGoalSet(" ")
+                GoalFragment.onGoalSet(" ")
             }
 
         }
         builder.setNegativeButton("cancel") { dialog, which ->
 
-            (context as GoalFragment).onGoalSet(" ")
+            GoalFragment.onGoalSet(" ")
         }
 
         ret = builder.create()

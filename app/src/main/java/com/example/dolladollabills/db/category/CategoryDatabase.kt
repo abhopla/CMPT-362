@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [Category::class], version = 1)
 abstract class CategoryDatabase : RoomDatabase() {
-    abstract val transactionDatabaseDao: CategoryDatabaseDao
+    abstract val categoryDatabaseDao: CategoryDatabaseDao
 
     companion object{
         @Volatile
@@ -17,7 +17,12 @@ abstract class CategoryDatabase : RoomDatabase() {
             synchronized(this){
                 var instance = INSTANCE
                 if(instance == null){
-                    instance = Room.databaseBuilder(context.applicationContext, CategoryDatabase::class.java, "category_table").build()
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        CategoryDatabase::class.java,
+                        "category_table")
+                        .createFromAsset("db/categories.db")
+                        .build()
                     INSTANCE = instance
                 }
                 return instance

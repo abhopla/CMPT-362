@@ -1,59 +1,114 @@
 package com.example.dolladollabills
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.dolladollabills.Analysis.MonthlyFragment
+import com.example.dolladollabills.Analysis.QuaterlyFragment
+import com.example.dolladollabills.Analysis.SavingFragment
+import com.example.dolladollabills.Analysis.YearlyFragment
+import com.example.dolladollabills.Analysis.budgetSpending.MonthlyBudgetFragment
+import com.example.dolladollabills.Analysis.budgetSpending.QuaterlyBudgetFragment
+import com.example.dolladollabills.Analysis.budgetSpending.YearlyBudgetFragment
+import com.example.dolladollabills.Analysis.spending.MonthlySpendingFragment
+import com.example.dolladollabills.Analysis.spending.QuaterlySpendingFragment
+import com.example.dolladollabills.Analysis.spending.YearlySpendingFragment
+import com.example.dolladollabills.databinding.FragmentAnalysisBinding
+import com.example.dolladollabills.db.budget.BudgetDatabase
+import com.example.dolladollabills.db.budget.BudgetRepository
+import com.example.dolladollabills.db.category.CategoryDatabase
+import com.example.dolladollabills.db.transaction.TransactionDatabase
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
+import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
+import com.google.android.material.tabs.TabLayoutMediator
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AnalysisFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AnalysisFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentAnalysisBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_analysis, container, false)
+        _binding =FragmentAnalysisBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        //budget database
+        val budgetDatabase = BudgetDatabase.getInstance(requireActivity())
+        val budgetDatabaseDao = budgetDatabase.budgetDatabaseDao
+        val budgetRepository = BudgetRepository(budgetDatabaseDao)
+        var check = budgetRepository.allCategories.toString()
+        Log.d("log-budget",check.toString())
+
+        //cateogy database
+        val categoryDatabase = CategoryDatabase.getInstance(requireActivity())
+        val categoryDatabaseDao = categoryDatabase.categoryDatabaseDao
+        var check2 = categoryDatabaseDao.getAllCategories()
+        Log.d("log-category",check2.toString())
+
+        //transaction database
+        val transactionDatabase = TransactionDatabase.getInstance(requireActivity())
+        val transactionDatabaseDao = transactionDatabase.transactionDatabaseDao
+        var check3 = transactionDatabaseDao.getAllTransactions()
+        Log.d("log-transaction",check3.toString())
+
+
+        //first graph
+        val viewPager = binding.viewPagerAnalysis
+        val tabLayout = binding.tabLayoutAnalysis
+        var fragment = ArrayList<Fragment>()
+        fragment.add(MonthlySpendingFragment()); fragment.add(QuaterlySpendingFragment()); fragment.add(YearlySpendingFragment());
+
+        val myFragmentStateAdapter = FragmentStateAdapter(requireActivity(),fragment)
+        viewPager.adapter = myFragmentStateAdapter
+
+        val tabTitles = arrayOf("Monthly","Quaterly","Yearly")
+        val tabConfigurationStrategy = TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+            tab.text = tabTitles[position]
+        }
+        val tabLayoutMediator = TabLayoutMediator(tabLayout, viewPager, tabConfigurationStrategy)
+        tabLayoutMediator.attach()
+
+        //second graph
+        val viewPager2 = binding.viewPagerAnalysis2
+        val tabLayout2 = binding.tabLayoutAnalysis2
+        var fragment2 = ArrayList<Fragment>()
+        fragment2.add(MonthlyBudgetFragment()); fragment2.add(QuaterlyBudgetFragment()); fragment2.add(
+            YearlyBudgetFragment()
+        );
+
+        val myFragmentStateAdapter2 = FragmentStateAdapter(requireActivity(),fragment2)
+        viewPager2.adapter = myFragmentStateAdapter2
+
+        val tabTitles2 = arrayOf("Monthly","Quaterly","Yearly")
+        val tabConfigurationStrategy2 = TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+            tab.text = tabTitles2[position]
+        }
+        val tabLayoutMediator2 = TabLayoutMediator(tabLayout2, viewPager2, tabConfigurationStrategy2)
+        tabLayoutMediator2.attach()
+
+        //third graph
+        val viewPager3 = binding.viewPagerAnalysis3
+        val tabLayout3 = binding.tabLayoutAnalysis3
+        var fragment3 = ArrayList<Fragment>()
+        fragment3.add(SavingFragment());
+
+        val myFragmentStateAdapter3 = FragmentStateAdapter(requireActivity(),fragment3)
+        viewPager3.adapter = myFragmentStateAdapter3
+
+        val tabTitles3 = arrayOf(" ")
+        val tabConfigurationStrategy3 = TabLayoutMediator.TabConfigurationStrategy { tab, position ->
+            tab.text = tabTitles2[position]
+        }
+        val tabLayoutMediator3 = TabLayoutMediator(tabLayout3, viewPager3, tabConfigurationStrategy3)
+        tabLayoutMediator3.attach()
+
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AnalysisFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AnalysisFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
