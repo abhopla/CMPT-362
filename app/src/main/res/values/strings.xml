@@ -2,17 +2,4 @@
     <string name="app_name">DollaDollaBills</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string-array name="default_categories">
-        <item>Drug Store</item>
-        <item>Entertainment</item>
-        <item>Furniture</item>
-        <item>Gas</item>
-        <item>Groceries</item>
-        <item>Home Improvement</item>
-        <item>Recurring Bills</item>
-        <item>Restaurants</item>
-        <item>Transportation</item>
-        <item>Travel</item>
-        <item>Other</item>
-    </string-array>
 </resources>
