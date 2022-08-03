@@ -44,7 +44,7 @@ class MonthlyBudgetFragment : Fragment() {
     private lateinit var categoryViewModel: CategoryViewModel
 
     private var categoryList : MutableList<String> = mutableListOf()
-    private val currentMonth = LocalDateTime.now().month.value-1 //ex. AUGUST = 8 > currentMonth = 7
+    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8 >
 
     private var budget : Long = 0
     private var spending : Long = 0
@@ -85,8 +85,11 @@ class MonthlyBudgetFragment : Fragment() {
             budget = 0
             spending = 0
 
+            //ex Date(transaction.milliseconds).month > August : 6
+            //Date(transaction.milliseconds).month+ 2 August : 8
+
             for (transaction: Transaction in it){
-                if (Date(transaction.milliseconds).month == currentMonth){
+                if (Date(transaction.milliseconds).month+2 == currentMonth){
                     if (transaction.category_id == incomeId ){
                         budget += transaction.amount
                     }else{

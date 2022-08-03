@@ -21,7 +21,7 @@ import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
 import java.time.LocalDateTime
 
-// TODO: without income 
+// TODO: without income , use current month
 
 class MonthlySpendingFragment : Fragment() {
     private var _binding: FragmentMonthlyspendingBinding? = null
@@ -42,7 +42,7 @@ class MonthlySpendingFragment : Fragment() {
     private lateinit var categoryViewModel: CategoryViewModel
 
     private var categoryList : MutableList<String> = mutableListOf()
-    private val currentMonth = LocalDateTime.now().month.value-1 //ex. AUGUST = 8 > currentMonth = 7
+    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8
 
 
     override fun onCreateView(
@@ -108,7 +108,7 @@ class MonthlySpendingFragment : Fragment() {
             }
 
 
-            var arrayAny : Array<Any> = intializaLongList_Any(spendingListNotZeroCount-1)
+            var arrayAny : Array<Any> = intializaLongList_Any(spendingListNotZeroCount)
             var i = 0
             for (n in graphData){
                 arrayAny[i] = n

@@ -242,6 +242,7 @@ class EntryFragment : Fragment() {
 
         transactionViewModel.insert(transaction)
 
+
         val toast = Toast.makeText(this.requireActivity(), "Transaction added", Toast.LENGTH_SHORT)
         toast.show()
     }

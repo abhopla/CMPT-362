@@ -4,18 +4,18 @@ object AnalysisUtil {
     fun intializaMonth(index: Int): Array<String>{
         var arrayMonth : Array<String> = arrayOf("Jan")
         when (index){
-            0 -> arrayMonth =  arrayOf("Jan")
-            1 -> arrayMonth = arrayOf("Jan","Feb")
-            2 -> arrayMonth = arrayOf("Jan","Feb","Mar")
-            3 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr")
-            4 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May")
-            5 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun")
-            6 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul")
-            7 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug")
-            8 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep")
-            9 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct")
-            10 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov")
-            11 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+            1 -> arrayMonth =  arrayOf("Jan")
+            2 -> arrayMonth = arrayOf("Jan","Feb")
+            3 -> arrayMonth = arrayOf("Jan","Feb","Mar")
+            4 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr")
+            5 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May")
+            6 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun")
+            7 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul")
+            8 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug")
+            9 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep")
+            10 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct")
+            11 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov")
+            12 -> arrayMonth = arrayOf("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
         }
         return arrayMonth
     }
@@ -23,18 +23,18 @@ object AnalysisUtil {
     fun intializaLongList(index: Int): Array<Long>{
         var arrayDouble : Array <Long> = arrayOf(0L)
         when (index){
-            0 -> arrayDouble = arrayOf(0L)
-            1 -> arrayDouble = arrayOf(0L,0L)
-            2 -> arrayDouble = arrayOf(0L,0L,0L)
-            3 -> arrayDouble = arrayOf(0L,0L,0L,0L)
-            4 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L)
-            5 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L)
-            6 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L)
-            7 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L)
-            8 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L)
-            9 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
-            10 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
-            11 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
+            1 -> arrayDouble = arrayOf(0L)
+            2 -> arrayDouble = arrayOf(0L,0L)
+            3 -> arrayDouble = arrayOf(0L,0L,0L)
+            4 -> arrayDouble = arrayOf(0L,0L,0L,0L)
+            5 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L)
+            6 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L)
+            7 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L)
+            8 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L)
+            9 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L)
+            10 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
+            11 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
+            12 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
         }
         return arrayDouble
     }
@@ -42,18 +42,18 @@ object AnalysisUtil {
     fun intializaLongList_Any(index: Int): Array<Any>{
         var arrayDouble : Array<Any> = arrayOf(0)
         when (index){
-            0 -> arrayDouble = arrayOf(0)
-            1 -> arrayDouble = arrayOf(0L,0L)
-            2 -> arrayDouble = arrayOf(0L,0L,0L)
-            3 -> arrayDouble = arrayOf(0L,0L,0L,0L)
-            4 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L)
-            5 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L)
-            6 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L)
-            7 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L)
-            8 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L)
-            9 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
-            10 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
-            11 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
+            1 -> arrayDouble = arrayOf(0)
+            2 -> arrayDouble = arrayOf(0L,0L)
+            3 -> arrayDouble = arrayOf(0L,0L,0L)
+            4 -> arrayDouble = arrayOf(0L,0L,0L,0L)
+            5 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L)
+            6 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L)
+            7 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L)
+            8 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L)
+            9 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L)
+            10 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
+            11 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
+            12 -> arrayDouble = arrayOf(0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L,0L)
         }
         return arrayDouble
     }
