@@ -9,13 +9,12 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dolladollabills.db.category.*
 import com.example.dolladollabills.db.transaction.*
-import kotlinx.coroutines.*
-import java.util.*
-import androidx.fragment.app.FragmentActivity
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -202,6 +201,18 @@ class EntryFragment : Fragment() {
     private fun onSaveClick(view: View) {
         refreshDialogValues()
         val transaction = Transaction()
+
+        val d = amountEdit.text.toString().toDouble()
+        val text = java.lang.Double.toString(Math.abs(d))
+        val integerPlaces = text.indexOf('.')
+        val decimalPlaces = text.length - integerPlaces - 1
+
+        if (decimalPlaces > 2) {
+            val toast = Toast.makeText(this.requireActivity(), "Error: Too many decimal places in amount", Toast.LENGTH_SHORT)
+            toast.show()
+            return
+        }
+
         transaction.amount = (amountEdit.text.toString().toDouble() * 100).toLong()
         transaction.description = descriptionEdit.text.toString()
         transaction.category_id = typeSpin.selectedItemPosition.toLong()
