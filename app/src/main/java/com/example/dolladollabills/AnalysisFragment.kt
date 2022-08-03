@@ -37,26 +37,6 @@ class AnalysisFragment : Fragment() {
         _binding =FragmentAnalysisBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        //budget database
-        val budgetDatabase = BudgetDatabase.getInstance(requireActivity())
-        val budgetDatabaseDao = budgetDatabase.budgetDatabaseDao
-        val budgetRepository = BudgetRepository(budgetDatabaseDao)
-        var check = budgetRepository.allCategories.toString()
-        Log.d("log-budget",check.toString())
-
-        //cateogy database
-        val categoryDatabase = CategoryDatabase.getInstance(requireActivity())
-        val categoryDatabaseDao = categoryDatabase.categoryDatabaseDao
-        var check2 = categoryDatabaseDao.getAllCategories()
-        Log.d("log-category",check2.toString())
-
-        //transaction database
-        val transactionDatabase = TransactionDatabase.getInstance(requireActivity())
-        val transactionDatabaseDao = transactionDatabase.transactionDatabaseDao
-        var check3 = transactionDatabaseDao.getAllTransactions()
-        Log.d("log-transaction",check3.toString())
-
-
         //first graph
         val viewPager = binding.viewPagerAnalysis
         val tabLayout = binding.tabLayoutAnalysis
