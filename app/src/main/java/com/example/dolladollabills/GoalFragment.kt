@@ -42,7 +42,7 @@ class GoalFragment : Fragment() {
         share.setOnClickListener(){
             val intent= Intent()
             intent.action=Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"Hey Check out this Great app:")
+            intent.putExtra(Intent.EXTRA_TEXT,"New goal: Create a budget and save $500 a month")
             intent.type="text/plain"
             startActivity(Intent.createChooser(intent,"Share To:"))
         }
