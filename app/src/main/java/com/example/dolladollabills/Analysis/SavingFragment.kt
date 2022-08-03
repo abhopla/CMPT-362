@@ -42,7 +42,7 @@ class SavingFragment : Fragment() {
     private lateinit var categoryViewModel: CategoryViewModel
 
     private var categoryList : MutableList<String> = mutableListOf()
-    private val currentMonth = LocalDateTime.now().month.value-1 //ex. AUGUST = 8 > currentMonth = 7
+    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8
     private var saving= intializaLongList(currentMonth)
     private var budget =  intializaLongList(currentMonth)
     private var spending =  intializaLongList(currentMonth)
@@ -62,6 +62,7 @@ class SavingFragment : Fragment() {
         categoryRepository = CategoryRepository(categoryDatabaseDao)
         categoryViewModelFactory = CategoryViewModelFactory(categoryRepository)
         categoryViewModel = ViewModelProvider(requireActivity(), categoryViewModelFactory).get(CategoryViewModel::class.java)
+
 
         //id start from 0
         categoryViewModel.allCategoriesLiveData.observe(requireActivity(), Observer { it ->
@@ -86,20 +87,22 @@ class SavingFragment : Fragment() {
 
             for (transaction: Transaction in it){
                 if (transaction.category_id == incomeId){
-                    budget[Date(transaction.milliseconds).month] += transaction.amount //August > 7
+                    budget[Date(transaction.milliseconds).month+1] += transaction.amount //August > Date(transaction.milliseconds).month+1 > 7
                 }else {
-                    spending[Date(transaction.milliseconds).month] += transaction.amount
+                    spending[Date(transaction.milliseconds).month+1] += transaction.amount
+
                 }
             }
 
-            for ( n in 0..currentMonth){
+            for ( n in 0 until currentMonth){
                 saving[n] = budget[n] - spending[n]
             }
+
 
             var savingData : Array<Any> = intializaLongList_Any(currentMonth)
             var budgetData : Array<Any> = intializaLongList_Any(currentMonth)
             var spendingData : Array<Any> = intializaLongList_Any(currentMonth)
-            for (n in 0..currentMonth){
+            for (n in 0 until currentMonth){
                 savingData[n] = saving[n]
                 budgetData[n] = budget[n]
                 spendingData[n] = spending[n]
