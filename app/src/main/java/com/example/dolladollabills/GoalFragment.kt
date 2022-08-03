@@ -1,10 +1,12 @@
 package com.example.dolladollabills
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +22,7 @@ class GoalFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var share: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,16 @@ class GoalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_goals, container, false)
+        val ret =  inflater.inflate(R.layout.fragment_goals, container, false)
+        share = ret!!.findViewById(R.id.shareButton)
+        share.setOnClickListener(){
+            val intent= Intent()
+            intent.action=Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,"Hey Check out this Great app:")
+            intent.type="text/plain"
+            startActivity(Intent.createChooser(intent,"Share To:"))
+        }
+        return ret
     }
 
     companion object {
