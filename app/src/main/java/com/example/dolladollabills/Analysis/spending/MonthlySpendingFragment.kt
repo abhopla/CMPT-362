@@ -43,6 +43,7 @@ class MonthlySpendingFragment : Fragment() {
 
     private var categoryList : MutableList<String> = mutableListOf()
     private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8
+    private val incomeId = 11L
 
 
     override fun onCreateView(
@@ -82,7 +83,9 @@ class MonthlySpendingFragment : Fragment() {
                 spendingList.add(0)
             }
             for (transaction: Transaction in it) {
-                spendingList[transaction.category_id.toInt()] += transaction.amount
+                if (transaction.category_id != incomeId){
+                    spendingList[transaction.category_id.toInt()] += transaction.amount
+                }
             }
 
             Log.d(log,"spendinglist"+spendingList.toString())
