@@ -43,10 +43,14 @@ class MainActivity : AppCompatActivity() {
 
         tabConfigurationStrategy =
             TabLayoutMediator.TabConfigurationStrategy { tab: TabLayout.Tab, position: Int ->
-                tab.text = tabTitles[position]
+                tab.text = ""
             }
         tabLayoutMediator = TabLayoutMediator(tabLayout, viewPager2, tabConfigurationStrategy)
         tabLayoutMediator.attach()
+        tabLayout.getTabAt(0)?.setIcon(R.drawable.editicon)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.graphicon)
+        tabLayout.getTabAt(2)?.setIcon(R.drawable.goalsicon)
+        tabLayout.getTabAt(3)?.setIcon(R.drawable.setttingicon)
     }
 
     override fun onDestroy() {
