@@ -26,7 +26,42 @@
         <entry key="app/src/main/res/layout/adapter_category.xml" value="0.2609375" />
         <entry key="app/src/main/res/layout/adapter_transaction.xml" value="0.2609375" />
         <entry key="app/src/main/res/layout/edit_text_dialog.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/fragment_Aprbudget.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/fragment_Novbudget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_analysis.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_aprbudget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_aprmonthlyspending.xml" value="0.2296195652173913" />
+        <entry key="app/src/main/res/layout/fragment_augbudget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_augmonthlyspending.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_budget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_decbudget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_devmonthlyspending.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/fragment_entry.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_febbudget.xml" value="0.2028985507246377" />
+        <entry key="app/src/main/res/layout/fragment_febmonthlyspending.xml" value="0.22604166666666667" />
+        <entry key="app/src/main/res/layout/fragment_janbudget.xml" value="0.2028985507246377" />
+        <entry key="app/src/main/res/layout/fragment_janmonthlyspending.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_julbudget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_julmonthlyspending.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_junbudget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_junmonthlyspending.xml" value="0.1802536231884058" />
+        <entry key="app/src/main/res/layout/fragment_marbudget.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/fragment_marmonthlyspending.xml" value="0.30416666666666664" />
+        <entry key="app/src/main/res/layout/fragment_maybudget.xml" value="0.203125" />
+        <entry key="app/src/main/res/layout/fragment_maymonthlyspending.xml" value="0.1802536231884058" />
+        <entry key="app/src/main/res/layout/fragment_monthly.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_novbudget.xml" value="0.20244565217391305" />
+        <entry key="app/src/main/res/layout/fragment_novmonthlyspending.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_octbudget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_octmonthlyspending.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_quaterly.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_sepbudget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_sepmonthlyspending.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_test.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_yearbudget.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_yearly.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_yearmonthlyspending.xml" value="0.28020833333333334" />
+        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.17708333333333334" />
       </map>
     </option>
   </component>
