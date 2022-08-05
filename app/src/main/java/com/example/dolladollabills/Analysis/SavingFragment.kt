@@ -12,7 +12,6 @@ import com.example.dolladollabills.Analysis.AnalysisUtil.intializaLongList
 import com.example.dolladollabills.Analysis.AnalysisUtil.intializaLongList_Any
 import com.example.dolladollabills.Analysis.AnalysisUtil.intializaMonth
 import com.example.dolladollabills.R
-import com.example.dolladollabills.databinding.FragmentMonthlyBinding
 import com.example.dolladollabills.databinding.FragmentMonthlybudgetBinding
 import com.example.dolladollabills.databinding.FragmentMonthlyspendingBinding
 import com.example.dolladollabills.db.category.*
@@ -42,7 +41,8 @@ class SavingFragment : Fragment() {
     private lateinit var categoryViewModel: CategoryViewModel
 
     private var categoryList : MutableList<String> = mutableListOf()
-    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8
+//    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8
+    private val currentMonth = 12 //ex. AUGUST = 8
     private var saving= intializaLongList(currentMonth)
     private var budget =  intializaLongList(currentMonth)
     private var spending =  intializaLongList(currentMonth)
@@ -87,8 +87,17 @@ class SavingFragment : Fragment() {
 
             for (transaction: Transaction in it){
                 if (transaction.category_id == incomeId){
+                    //for Jan
+                    if (Date(transaction.milliseconds).month+1 == 12){
+                        budget[0] += transaction.amount //August > Date(transaction.milliseconds).month+1 > 7
+                        continue
+                    }
                     budget[Date(transaction.milliseconds).month+1] += transaction.amount //August > Date(transaction.milliseconds).month+1 > 7
                 }else {
+                    if (Date(transaction.milliseconds).month+1 == 12){
+                        spending[0] += transaction.amount
+                        continue
+                    }
                     spending[Date(transaction.milliseconds).month+1] += transaction.amount
 
                 }

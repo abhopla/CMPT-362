@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Analysis.spending.QuaterlySpendingFragment">
+    tools:context=".Analysis.spending.AugSpendingFragment">
 
     <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
-        android:id="@+id/quaterlySpendingChart"
+        android:id="@+id/monthlySpendingChart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"

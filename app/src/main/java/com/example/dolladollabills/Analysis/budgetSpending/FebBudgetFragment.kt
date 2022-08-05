@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.dolladollabills.R
+import com.example.dolladollabills.databinding.FragmentFebbudgetBinding
+import com.example.dolladollabills.databinding.FragmentJanbudgetBinding
 import com.example.dolladollabills.databinding.FragmentMonthlybudgetBinding
 import com.example.dolladollabills.databinding.FragmentMonthlyspendingBinding
 import com.example.dolladollabills.db.budget.*
@@ -21,11 +23,8 @@ import java.time.LocalDateTime
 import java.util.*
 
 
-// TODO: 지금은 8월로 설정되더있음, 각각 먼스로 그리고 year로 볼수잇게 만들기
-
-
-class MonthlyBudgetFragment : Fragment() {
-    private var _binding: FragmentMonthlybudgetBinding? = null
+class FebBudgetFragment : Fragment() {
+    private var _binding: FragmentFebbudgetBinding? = null
     private val binding get() = _binding!!
 
     private val log = "log-monthly budget"
@@ -43,17 +42,18 @@ class MonthlyBudgetFragment : Fragment() {
     private lateinit var categoryViewModel: CategoryViewModel
 
     private var categoryList : MutableList<String> = mutableListOf()
-    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8 >
+//    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8 >
+    private val currentMonth = 2 //Feb
 
     private var budget : Long = 0
     private var spending : Long = 0
-    private var incomeId : Long = 11 // TODO: revise if we put income as dafult category
+    private var incomeId : Long = 11
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMonthlybudgetBinding.inflate(inflater, container, false)
+        _binding = FragmentFebbudgetBinding.inflate(inflater, container, false)
         val view = binding.root
 
         categoryDatabase = CategoryDatabase.getInstance(requireActivity())
