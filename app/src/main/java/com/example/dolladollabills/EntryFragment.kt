@@ -15,7 +15,7 @@ import com.example.dolladollabills.db.transaction.*
 import kotlinx.coroutines.*
 import java.util.*
 import androidx.fragment.app.FragmentActivity
-
+import java.text.SimpleDateFormat
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,6 +44,14 @@ private lateinit var amountEdit: EditText
 
 private var categoryList: MutableList<String> = mutableListOf()
 
+private var hour = -1
+private var minute = -1
+private var year = -1
+private var month = -1
+private var date = -1
+private var spinnerPosition = 0
+
+
 /**
  * A simple [Fragment] subclass.
  * Use the [EntryFragment.newInstance] factory method to
@@ -62,7 +70,21 @@ class EntryFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
         initializeDatabases()
+        restoreSpinner(savedInstanceState)
 
+        Log.d("WHYYY", "create")
+
+    }
+
+    private fun restoreSpinner(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            spinnerPosition = savedInstanceState.getInt("spinner_value", spinnerPosition)
+            if (typeSpin != null) {
+                Log.d("WHYYYY", "FUCKING HERE $spinnerPosition")
+                typeSpin.setSelection(spinnerPosition)
+                typeSpin.prompt
+            }
+        }
     }
 
     override fun onCreateView(
@@ -73,12 +95,14 @@ class EntryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_entry, container, false)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         finalizeViews(view)
+        Log.d("WHYYY", "createview")
         return view
     }
 
     private fun finalizeViews(view: View) {
         descriptionEdit = view.findViewById(R.id.entry_transaction_description_edit) as EditText
         typeSpin = view.findViewById(R.id.entry_transaction_type_spin) as Spinner
+
 
         categoryViewModel.allCategoriesLiveData.observe(requireActivity()) { categories ->
             categoryList = mutableListOf()
@@ -94,12 +118,20 @@ class EntryFragment : Fragment() {
         amountEdit = view.findViewById(R.id.entry_transaction_amount_edit) as EditText
         amountEdit.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
 
+        val dateButton: Button = view.findViewById(R.id.entry_date_button)
+        dateButton.setOnClickListener() { onDateClick(view) }
+
+        val timeButton: Button = view.findViewById(R.id.entry_time_button)
+        timeButton.setOnClickListener() { onTimeClick(view) }
+
         val saveButton: Button = view.findViewById(R.id.entry_save_button)
         saveButton.setOnClickListener() { onSaveClick(view) }
 
         val addCategoryButton: Button = view.findViewById(R.id.entry_add_category_button)
         addCategoryButton.setOnClickListener() { onAddCategoryClick(view) }
     }
+
+
 
     private fun initializeDatabases() {
         transactionDatabase = TransactionDatabase.getInstance(this.requireActivity())
@@ -122,6 +154,15 @@ class EntryFragment : Fragment() {
 
     }
 
+    private fun refreshDialogValues() {
+        var dialogData = dialog.dialogValues
+        hour = dialogData.getInt("hour_field", hour)
+        minute = dialogData.getInt("minute_field", minute)
+        year = dialogData.getInt("year_field", year)
+        month = dialogData.getInt("month_field", month)
+        date = dialogData.getInt("day_field", date)
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -142,14 +183,65 @@ class EntryFragment : Fragment() {
             }
     }
 
+    private fun onTimeClick(view: View) {
+        refreshDialogValues()
+        val bundle = Bundle()
+        bundle.putInt(DollaDialog.DIALOG_KEY, DollaDialog.TIME_DIALOG)
+        dialog.arguments = bundle
+        dialog.show((activity as FragmentActivity).supportFragmentManager, "category dialog")
+    }
+
+    private fun onDateClick(view: View) {
+        refreshDialogValues()
+        val bundle = Bundle()
+        bundle.putInt(DollaDialog.DIALOG_KEY, DollaDialog.DATE_DIALOG)
+        dialog.arguments = bundle
+        dialog.show((activity as FragmentActivity).supportFragmentManager, "category dialog")
+    }
+
     private fun onSaveClick(view: View) {
+        refreshDialogValues()
         val transaction = Transaction()
         transaction.amount = (amountEdit.text.toString().toDouble() * 100).toLong()
         transaction.description = descriptionEdit.text.toString()
         transaction.category_id = typeSpin.selectedItemPosition.toLong()
-        transaction.milliseconds = Calendar.getInstance().timeInMillis
+
+        val sdf = SimpleDateFormat("HH:mm MM dd yyyy")
+
+        if (hour == -1) {
+            if (year == -1) {
+                transaction.milliseconds = Calendar.getInstance().timeInMillis
+            } else {
+                var curHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).toString()
+                var curMinute = Calendar.getInstance().get(Calendar.MINUTE).toString()
+
+                val timeString = "$curHour:$curMinute $month $date $year"
+                transaction.milliseconds = sdf.parse(timeString).time
+
+            }
+        } else if (year == -1) {
+
+            year = Calendar.getInstance().get(Calendar.YEAR)
+            month = (Calendar.getInstance().get(Calendar.MONTH) + 1)
+            date = Calendar.getInstance().get(Calendar.DATE)
+
+
+            val timeString = "$hour:$minute $month $date $year"
+            transaction.milliseconds = sdf.parse(timeString).time
+        } else {
+            val timeString = "$hour:$minute $month $date $year"
+            transaction.milliseconds = sdf.parse(timeString).time
+        }
+
+        Log.d("WHYYY", "year = $year")
+        Log.d("WHYYY", "month = $month")
+        Log.d("WHYYY", "date = $date")
+        Log.d("WHYYY", "hour = $hour")
+        Log.d("WHYYY", "minute = $minute")
+
 
         transactionViewModel.insert(transaction)
+
 
         val toast = Toast.makeText(this.requireActivity(), "Transaction added", Toast.LENGTH_SHORT)
         toast.show()
@@ -163,9 +255,30 @@ class EntryFragment : Fragment() {
         dialog.show((activity as FragmentActivity).supportFragmentManager, "category dialog")
     }
 
+    override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        super.onSaveInstanceState(savedInstanceState)
+        refreshDialogValues()
+        savedInstanceState.putInt("hour_value", hour)
+        savedInstanceState.putInt("minute_value", minute)
+        savedInstanceState.putInt("year_value", year)
+        savedInstanceState.putInt("month_value", month)
+        savedInstanceState.putInt("date_value", date)
+        savedInstanceState.putInt("spinner_value", typeSpin.selectedItemPosition)
+        Log.d("WHYYY", "saved")
+    }
+
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
-        Log.d("WHYYY", "VIEWSTATERESTORED")
+        if (savedInstanceState != null) {
+            hour = savedInstanceState.getInt("hour_value", hour)
+            minute = savedInstanceState.getInt("minute_value", minute)
+            year = savedInstanceState.getInt("year_value", year)
+            month = savedInstanceState.getInt("month_value", month)
+            date = savedInstanceState.getInt("date_value", date)
+        }
+
+        Log.d("WHYYY", "restored")
+
     }
 
 }

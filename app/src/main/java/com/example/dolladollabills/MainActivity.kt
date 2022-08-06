@@ -1,12 +1,15 @@
 package com.example.dolladollabills
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import java.util.ArrayList
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var entryFragment: EntryFragment
@@ -43,14 +46,38 @@ class MainActivity : AppCompatActivity() {
 
         tabConfigurationStrategy =
             TabLayoutMediator.TabConfigurationStrategy { tab: TabLayout.Tab, position: Int ->
-                tab.text = tabTitles[position]
+                tab.text = ""
             }
         tabLayoutMediator = TabLayoutMediator(tabLayout, viewPager2, tabConfigurationStrategy)
         tabLayoutMediator.attach()
+        tabLayout.getTabAt(0)?.setIcon(R.drawable.editicon)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.graphicon)
+        tabLayout.getTabAt(2)?.setIcon(R.drawable.goalsicon)
+        tabLayout.getTabAt(3)?.setIcon(R.drawable.setttingicon)
+
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         tabLayoutMediator.detach()
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menu.add(0, 0, 0, "Receipt Scanner").setShowAsAction(2)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            0 -> {
+                val myIntent = Intent(this, ReceiptScanner::class.java)
+                this.startActivity(myIntent)
+                true
+            }
+            else -> {
+                finish()
+                false
+            }
+        }
     }
 }

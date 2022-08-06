@@ -9,7 +9,10 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.dolladollabills.db.goals.*
 import kotlinx.coroutines.InternalCoroutinesApi
+import java.util.ArrayList
 
 
 private lateinit var editTextt: EditText
@@ -17,6 +20,13 @@ private lateinit var editTextt: EditText
 class Dialogue : DialogFragment(), DialogInterface.OnClickListener {
 
     private var title: String? = null
+    private lateinit var goalViewmodel: GoalViewModel
+    private lateinit var goalListAdapter: GoalListAdapter
+    private lateinit var database: GoalDatabase
+    private lateinit var databaseDao: GoalDatabaseDao
+    private lateinit var repository: GoalRepository
+    private lateinit var viewModelFactory: GoalViewModelFactory
+    private lateinit var arrayList: ArrayList<Goal>
 
     //Necessary keys to determine the correct Dialog
     companion object {
@@ -32,6 +42,16 @@ class Dialogue : DialogFragment(), DialogInterface.OnClickListener {
     @OptIn(InternalCoroutinesApi::class)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         lateinit var ret: Dialog
+        arrayList = ArrayList()
+        goalListAdapter = GoalListAdapter(requireActivity(), arrayList)
+
+
+        database = GoalDatabase.getInstance(requireActivity())
+        databaseDao = database.goalDatabaseDao
+        repository = GoalRepository(databaseDao)
+        viewModelFactory = GoalViewModelFactory(repository)
+        goalViewmodel = ViewModelProvider(requireActivity(), viewModelFactory).get(GoalViewModel::class.java)
+
         val bundle = arguments
         val dialogId = bundle?.getInt(DIALOG_KEY)
 
@@ -45,19 +65,17 @@ class Dialogue : DialogFragment(), DialogInterface.OnClickListener {
         builder.setPositiveButton("ok") { dialog, which ->
             if (editTextt.text != null) {
                 val tesstt = editTextt.text.toString()
-
-                GoalFragment.onGoalSet( tesstt)
+                onGoalSet(tesstt)
 
             } else {
-                GoalFragment.onGoalSet(" ")
+                onGoalSet(" ")
             }
 
         }
         builder.setNegativeButton("cancel") { dialog, which ->
 
-            GoalFragment.onGoalSet(" ")
+            onGoalSet(" ")
         }
-
         ret = builder.create()
         return ret
     }
@@ -71,5 +89,14 @@ class Dialogue : DialogFragment(), DialogInterface.OnClickListener {
             }
         }
 
+    fun onGoalSet( goall: String) {
 
+        goal.name = goall
+        println("debug dbb: ${goal.name}")
+        goalListAdapter.replace(arrayList)
+        goalListAdapter.notifyDataSetChanged()
+        goalViewmodel.insert(goal)
+
+
+    }
 }

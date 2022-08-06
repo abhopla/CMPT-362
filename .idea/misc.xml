@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/fragment_goals.xml" value="0.1" />
         <entry key="..\:/Users/tomuc/AndroidStudioProjects/CMPT-362/app/src/main/res/layout/goal_list_adapter.xml" value="0.1" />
       </map>
     </option>

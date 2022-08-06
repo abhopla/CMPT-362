@@ -10,7 +10,7 @@ import com.example.dolladollabills.R
 class GoalListAdapter(private val context: Context, private var goalList: List<Goal>): BaseAdapter() {
 
     override fun getItem(position: Int): Any {
-        return goalList.get(position)
+        return goalList[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -25,8 +25,10 @@ class GoalListAdapter(private val context: Context, private var goalList: List<G
 
         val view: View = View.inflate(context, R.layout.goal_list_adapter,null)
         val textViewgoal = view.findViewById(R.id.goaltext) as TextView
-        print("debug: $goalList.get(position).name\n")
-        textViewgoal.text = goalList.get(position).name
+        val textviewgoal =  view.findViewById(R.id.gaolllll) as TextView
+        print("debugaa: $goalList.get(position).name\n")
+        textViewgoal.text = goalList.get(position).name.toString()
+        textviewgoal.text = "Your Goal!"
 
         return view
     }
