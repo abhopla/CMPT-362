@@ -1,4 +1,4 @@
-package com.example.dolladollabills.Analysis.budgetSpending
+package com.example.dolladollabills.Analysis.spending
 
 import android.os.Bundle
 import android.util.Log
@@ -8,27 +8,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.dolladollabills.Analysis.AnalysisUtil.intializaLongList_Any
+import com.example.dolladollabills.Analysis.AnalysisUtil.intializaSpendingGraphData
 import com.example.dolladollabills.R
-import com.example.dolladollabills.databinding.FragmentMonthlybudgetBinding
+import com.example.dolladollabills.databinding.FragmentFebmonthlyspendingBinding
+import com.example.dolladollabills.databinding.FragmentJanmonthlyspendingBinding
 import com.example.dolladollabills.databinding.FragmentMonthlyspendingBinding
-import com.example.dolladollabills.db.budget.*
+import com.example.dolladollabills.databinding.FragmentOctmonthlyspendingBinding
 import com.example.dolladollabills.db.category.*
 import com.example.dolladollabills.db.transaction.*
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
 import java.time.LocalDateTime
 import java.util.*
 
+// TODO: without income , use current month
 
-// TODO: 지금은 8월로 설정되더있음, 각각 먼스로 그리고 year로 볼수잇게 만들기
-
-
-class MonthlyBudgetFragment : Fragment() {
-    private var _binding: FragmentMonthlybudgetBinding? = null
+class OctSpendingFragment : Fragment() {
+    private var _binding: FragmentOctmonthlyspendingBinding? = null
     private val binding get() = _binding!!
 
-    private val log = "log-monthly budget"
+    private val log = "log-monthly saving"
 
     private lateinit var transactionDatabase: TransactionDatabase
     private lateinit var trasactionDatabaseDao: TransactionDatabaseDao
@@ -43,18 +45,18 @@ class MonthlyBudgetFragment : Fragment() {
     private lateinit var categoryViewModel: CategoryViewModel
 
     private var categoryList : MutableList<String> = mutableListOf()
-    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8 >
+//    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8
+    private val currentMonth = 10 //Oct
+    private val incomeId = 11L
 
-    private var budget : Long = 0
-    private var spending : Long = 0
-    private var incomeId : Long = 11 // TODO: revise if we put income as dafult category
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMonthlybudgetBinding.inflate(inflater, container, false)
+        _binding = FragmentOctmonthlyspendingBinding.inflate(inflater, container, false)
         val view = binding.root
+
 
         categoryDatabase = CategoryDatabase.getInstance(requireActivity())
         categoryDatabaseDao = categoryDatabase.categoryDatabaseDao
@@ -66,9 +68,6 @@ class MonthlyBudgetFragment : Fragment() {
         categoryViewModel.allCategoriesLiveData.observe(requireActivity(), Observer { it ->
             for (category :Category in it){
                 categoryList.add(category.name)
-                if (category.name == "income"){
-                    incomeId = category.id
-                }
             }
         })
 
@@ -77,47 +76,77 @@ class MonthlyBudgetFragment : Fragment() {
         transactionRepository = TransactionRepository(trasactionDatabaseDao)
         transactionViewModelFactory = TransactionViewModelFactory(transactionRepository)
         transactionViewModel = ViewModelProvider(requireActivity(), transactionViewModelFactory).get(TransactionViewModel::class.java)
-        var data = transactionViewModel.allTransactionsLiveData
 
         transactionViewModel.allTransactionsLiveData.observe(requireActivity(), Observer { it ->
-            Log.d(log,it.toString())
-            budget = 0
-            spending = 0
+//            Log.d(log,it.toString())
+            var categorySize = categoryList.size
 
-            //ex Date(transaction.milliseconds).month > August : 6
-            //Date(transaction.milliseconds).month+ 2 August : 8
-
-            for (transaction: Transaction in it){
-                if (Date(transaction.milliseconds).month+2 == currentMonth){
-                    if (transaction.category_id == incomeId ){
-                        budget += transaction.amount
-                    }else{
-                        spending += transaction.amount
-                    }
+            //initialize
+            var spendingList : MutableList<Long> = mutableListOf()
+            for (n in 0..categorySize-1){
+                spendingList.add(0)
+            }
+            for (transaction: Transaction in it) {
+                if ((transaction.category_id != incomeId) && (Date(transaction.milliseconds).month+2 == currentMonth)){
+                    spendingList[transaction.category_id.toInt()] += transaction.amount
                 }
-
             }
 
-            val aaChartView = binding.monthlyBudgetChart
+            Log.d(log,"spendinglist"+spendingList.toString())
+            Log.d(log,"categorylist"+categoryList.toString())
+
+            var spendingListNotZeroCount = 0
+            for (n in spendingList){
+                if (n != 0L){
+                    spendingListNotZeroCount++
+                }
+            }
+            
+            var graphData = intializaSpendingGraphData(spendingListNotZeroCount)
+
+
+            var graphDataIndex = 0
+            for (n in 0..spendingList.size-1){
+                if (spendingList[n] != 0L){
+                    var data = arrayOf(categoryList[n],spendingList[n])
+                    graphData[graphDataIndex] = data
+                    graphDataIndex++
+                }
+            }
+
+
+            var arrayAny : Array<Any> = intializaLongList_Any(spendingListNotZeroCount)
+            var i = 0
+            for (n in graphData){
+                arrayAny[i] = n
+                i++
+            }
+
+            val aaChartView = binding.monthlySpendingChart
             val aaChartModel : AAChartModel = AAChartModel()
-                .chartType(AAChartType.Bar)
-                .dataLabelsEnabled(true)
+                .chartType(AAChartType.Pie)
+                .dataLabelsEnabled(false)
                 .series(arrayOf(
                     AASeriesElement()
-                        .name("Budget")
-                        .data(arrayOf(budget)),
-                    AASeriesElement()
                         .name("Spending")
-                        .data(arrayOf(spending)),
+                        .data(arrayAny)
                 )
                 )
 
             aaChartView.aa_drawChartWithChartModel(aaChartModel)
-
-
         })
+
+
+
+
+
+
+
+
 
         return view
     }
 
 }
+
+

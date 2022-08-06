@@ -6,98 +6,128 @@
     android:layout_height="match_parent"
     tools:context=".AnalysisFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="Spending (by categories)"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:text="Spending (by categories)"/>-->
 
-        <com.google.android.material.tabs.TabLayout
-            android:layout_marginLeft="100dp"
-            android:id="@+id/tabLayout_analysis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+<!--        <com.google.android.material.tabs.TabLayout-->
+<!--            android:layout_marginLeft="100dp"-->
+<!--            android:id="@+id/tabLayout_analysis"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content">-->
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Monday" />
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Monday" />-->
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tuesday" />
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Tuesday" />-->
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wednesday" />
-        </com.google.android.material.tabs.TabLayout>
+<!--            <com.google.android.material.tabs.TabItem-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Wednesday" />-->
+<!--        </com.google.android.material.tabs.TabLayout>-->
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager_analysis"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp" />
+<!--        <androidx.viewpager2.widget.ViewPager2-->
+<!--            android:id="@+id/viewPager_analysis"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="300dp"-->
+<!--            android:layout_marginStart="1dp"-->
+<!--            android:layout_marginEnd="1dp" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="Budget and Spending"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:text="Budget and Spending"/>-->
+
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:layout_marginLeft="100dp"-->
+<!--                android:id="@+id/tabLayout_analysis2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Monday" />-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Tuesday" />-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Wednesday" />-->
+<!--            </com.google.android.material.tabs.TabLayout>-->
+
+<!--            <androidx.viewpager2.widget.ViewPager2-->
+<!--                android:id="@+id/viewPager_analysis2"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:layout_marginStart="1dp"-->
+<!--                android:layout_marginEnd="1dp" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:text="Income, Saving, Spending"/>-->
+
+<!--            <com.google.android.material.tabs.TabLayout-->
+<!--                android:layout_marginLeft="250dp"-->
+<!--                android:id="@+id/tabLayout_analysis3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Monday" />-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Tuesday" />-->
+
+<!--                <com.google.android.material.tabs.TabItem-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Wednesday" />-->
+<!--            </com.google.android.material.tabs.TabLayout>-->
+
+<!--            <androidx.viewpager2.widget.ViewPager2-->
+<!--                android:id="@+id/viewPager_analysis3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:layout_marginStart="1dp"-->
+<!--                android:layout_marginEnd="1dp" />-->
+
+
 
             <com.google.android.material.tabs.TabLayout
-                android:layout_marginLeft="100dp"
-                android:id="@+id/tabLayout_analysis2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Monday" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tuesday" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Wednesday" />
-            </com.google.android.material.tabs.TabLayout>
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager_analysis2"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginEnd="1dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="Income, Saving, Spending"/>
-
-            <com.google.android.material.tabs.TabLayout
-                android:layout_marginLeft="250dp"
                 android:id="@+id/tabLayout_analysis3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.tabs.TabItem
@@ -119,14 +149,13 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager_analysis3"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginEnd="1dp" />
+                android:layout_height="450dp" />
+
 
 
 
         </LinearLayout>
 
-    </ScrollView>
+<!--    </ScrollView>-->
 
 </FrameLayout>
