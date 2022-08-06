@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dolladollabills.Analysis.AnalysisUtil.intializaLongList_Any
 import com.example.dolladollabills.Analysis.AnalysisUtil.intializaSpendingGraphData
 import com.example.dolladollabills.R
-import com.example.dolladollabills.databinding.FragmentMonthlyBinding
 import com.example.dolladollabills.databinding.FragmentMonthlyspendingBinding
 import com.example.dolladollabills.db.category.*
 import com.example.dolladollabills.db.transaction.*
@@ -20,6 +19,7 @@ import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AADataLabels
 import java.time.LocalDateTime
+import java.util.*
 
 // TODO: without income , use current month
 
@@ -83,7 +83,7 @@ class MonthlySpendingFragment : Fragment() {
                 spendingList.add(0)
             }
             for (transaction: Transaction in it) {
-                if (transaction.category_id != incomeId){
+                if ((transaction.category_id != incomeId) && (Date(transaction.milliseconds).month+2 == currentMonth)){
                     spendingList[transaction.category_id.toInt()] += transaction.amount
                 }
             }

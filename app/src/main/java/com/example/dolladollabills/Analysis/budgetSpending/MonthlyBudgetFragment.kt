@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.dolladollabills.R
-import com.example.dolladollabills.databinding.FragmentMonthlyBinding
 import com.example.dolladollabills.databinding.FragmentMonthlybudgetBinding
 import com.example.dolladollabills.databinding.FragmentMonthlyspendingBinding
 import com.example.dolladollabills.db.budget.*

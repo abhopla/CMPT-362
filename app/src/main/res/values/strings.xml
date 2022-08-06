@@ -1,5 +1,28 @@
 <resources>
     <string name="app_name">DollaDollaBills</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="default_categories">
+        <item>Drug Store</item>
+        <item>Entertainment</item>
+        <item>Furniture</item>
+        <item>Gas</item>
+        <item>Groceries</item>
+        <item>Home Improvement</item>
+        <item>Recurring Bills</item>
+        <item>Restaurants</item>
+        <item>Transportation</item>
+        <item>Travel</item>
+        <item>Other</item>
+    </string-array>
+
+    <!-- Checkout activity -->
+    <string name="title_activity_google_pay">GooglePayActivity</string>
+    <string name="checkout_item_description">Description</string>
+    <string name="googlepay_status_unavailable" translatable="false">Unfortunately, Google Pay is
+        not available on this phone.
+    </string>
+    <string name="payments_show_name" translatable="false">Successfully received payment data for
+        %s!
+    </string>
+
 </resources>

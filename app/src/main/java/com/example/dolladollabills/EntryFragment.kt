@@ -252,6 +252,8 @@ class EntryFragment : Fragment() {
 
 
         transactionViewModel.insert(transaction)
+        Log.d("check123",transaction.toString())
+        Log.d("check123",Date(transaction.milliseconds).month.toString())
 
 
         val toast = Toast.makeText(this.requireActivity(), "Transaction added", Toast.LENGTH_SHORT)
