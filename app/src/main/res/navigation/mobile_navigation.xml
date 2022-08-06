@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_input">
+
+    <fragment
+        android:id="@+id/nav_input"
+        android:name="com.example.dolladollabills.EntryFragment"
+        android:label="DollaDolla Bills"
+        tools:layout="@layout/fragment_entry" />
+
+    <fragment
+        android:id="@+id/nav_analysis"
+        android:name="com.example.dolladollabills.AnalysisFragment"
+        android:label="Analysis"
+        tools:layout="@layout/fragment_analysis" />
+    <fragment
+        android:id="@+id/nav_goal"
+        android:name="com.example.dolladollabills.GoalFragment"
+        android:label="Goal"
+        tools:layout="@layout/fragment_goals" />
+    <fragment
+        android:id="@+id/nav_extra"
+        android:name="com.example.dolladollabills.ExtraFragment"
+        android:label="Extra"
+        tools:layout="@layout/fragment_extra" />
+
+</navigation>

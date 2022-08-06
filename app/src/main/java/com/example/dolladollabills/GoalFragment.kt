@@ -38,14 +38,6 @@ class GoalFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val ret =  inflater.inflate(R.layout.fragment_goals, container, false)
-        share = ret!!.findViewById(R.id.shareButton)
-        share.setOnClickListener(){
-            val intent= Intent()
-            intent.action=Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"New goal: Create a budget and save $500 a month")
-            intent.type="text/plain"
-            startActivity(Intent.createChooser(intent,"Share To:"))
-        }
         return ret
     }
 
