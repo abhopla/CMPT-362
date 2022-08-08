@@ -22,4 +22,10 @@ class GoalRepository(private val goalDatabaseDao: GoalDatabaseDao) {
             goalDatabaseDao.deleteGoal(id)
         }
     }
+
+    fun getAll(){
+        CoroutineScope(Dispatchers.IO).launch {
+            goalDatabaseDao.getAllGoals()
+        }
+    }
 }

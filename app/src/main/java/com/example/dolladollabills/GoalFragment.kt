@@ -1,10 +1,5 @@
 package com.example.dolladollabills
 
-
-import android.content.Context
-
-import android.content.Intent
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -67,7 +62,6 @@ class GoalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         val view =  inflater.inflate(R.layout.fragment_goals, container, false)
         listView = view.findViewById(R.id.goallist)
         goalbutton =  view.findViewById(R.id.newgoal)
@@ -104,17 +98,8 @@ class GoalFragment : Fragment() {
         }
 
 
-
-        share = view!!.findViewById(R.id.shareButton)
-        share.setOnClickListener(){
-            val intent= Intent()
-            intent.action=Intent.ACTION_SEND
-            intent.putExtra(Intent.EXTRA_TEXT,"New goal: Create a budget and save $500 a month")
-            intent.type="text/plain"
-            startActivity(Intent.createChooser(intent,"Share To:"))
-        }
-
         return view
+
     }
 
 

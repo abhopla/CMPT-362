@@ -16,6 +16,11 @@ class GoalViewModel(private val repository: GoalRepository): ViewModel() {
     fun delete(id: Long) {
         repository.delete(id)
     }
+
+    fun getAll (){
+        repository.getAll()
+    }
+
 }
 
 class GoalViewModelFactory (private val repository: GoalRepository) : ViewModelProvider.Factory {

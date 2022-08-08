@@ -14,6 +14,7 @@ interface GoalDatabaseDao {
     @Query("SELECT * FROM goals_table")
     fun getAllGoals(): Flow<List<Goal>>
 
+
     @Query("DELETE FROM goals_table WHERE id = :key")
     suspend fun deleteGoal(key: Long)
 }
