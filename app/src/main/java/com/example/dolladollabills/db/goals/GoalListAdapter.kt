@@ -21,6 +21,7 @@ class GoalListAdapter(private val context: Context, private var goalList: List<G
         return goalList.size
     }
 
+
     override fun getView(position: Int, p1: View?, p2: ViewGroup?): View {
 
         val view: View = View.inflate(context, R.layout.goal_list_adapter,null)
