@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             goals.forEach {
                goalsArr.add(it.name)
             }
-            println("DEBUG my goals ${goalsArr[0]}")
+
         })
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
