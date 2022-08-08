@@ -29,6 +29,7 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import kotlin.math.abs
 
 
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -90,7 +91,6 @@ class EntryFragment : Fragment() {
         { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 if (result.data?.data != null) {
-                    Log.d("WHYYY", result.data!!.data.toString())
                     addCSVData(result.data!!.data!!)
 
                 }
@@ -283,8 +283,9 @@ class EntryFragment : Fragment() {
                 } else {
                     var curHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).toString()
                     var curMinute = Calendar.getInstance().get(Calendar.MINUTE).toString()
+                    var actualMonth = month + 1
 
-                    val timeString = "$curHour:$curMinute $month $date $year"
+                    val timeString = "$curHour:$curMinute $actualMonth $date $year"
                     milliseconds = sdf.parse(timeString).time
                 }
             } else if (year == -1) {

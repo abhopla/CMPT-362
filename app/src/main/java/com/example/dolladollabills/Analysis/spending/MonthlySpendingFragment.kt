@@ -78,13 +78,13 @@ class MonthlySpendingFragment : Fragment() {
             var categorySize = categoryList.size
 
             //initialize
-            var spendingList : MutableList<Long> = mutableListOf()
+            var spendingList : MutableList<Double> = mutableListOf()
             for (n in 0..categorySize-1){
-                spendingList.add(0)
+                spendingList.add(0.0)
             }
             for (transaction: Transaction in it) {
-                if ((transaction.category_id != incomeId) && (Date(transaction.milliseconds).month+2 == currentMonth)){
-                    spendingList[transaction.category_id.toInt()] += transaction.amount
+                if ((transaction.category_id != incomeId) && (Date(transaction.milliseconds).month+1 == currentMonth)){
+                    spendingList[transaction.category_id.toInt()] += transaction.amount / 100.0
                 }
             }
 
@@ -93,7 +93,7 @@ class MonthlySpendingFragment : Fragment() {
 
             var spendingListNotZeroCount = 0
             for (n in spendingList){
-                if (n != 0L){
+                if (n != 0.0){
                     spendingListNotZeroCount++
                 }
             }
@@ -103,7 +103,7 @@ class MonthlySpendingFragment : Fragment() {
 
             var graphDataIndex = 0
             for (n in 0..spendingList.size-1){
-                if (spendingList[n] != 0L){
+                if (spendingList[n] != 0.0){
                     var data = arrayOf(categoryList[n],spendingList[n])
                     graphData[graphDataIndex] = data
                     graphDataIndex++
