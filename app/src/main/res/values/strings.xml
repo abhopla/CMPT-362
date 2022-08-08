@@ -6,4 +6,19 @@
     <string name="nav_header_title">DollaDolla Bills</string>
     <string name="nav_header_subtitle">Make a budget plan </string>
     <string name="nav_header_desc">Navigation header</string>
+
+    <string-array name="default_categories">
+        <item>Drug Store</item>
+        <item>Entertainment</item>
+        <item>Furniture</item>
+        <item>Gas</item>
+        <item>Groceries</item>
+        <item>Home Improvement</item>
+        <item>Recurring Bills</item>
+        <item>Restaurants</item>
+        <item>Transportation</item>
+        <item>Travel</item>
+        <item>Other</item>
+    </string-array>
+
 </resources>
