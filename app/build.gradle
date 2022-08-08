@@ -76,6 +76,9 @@ dependencies {
     //AAchartmodel
     implementation 'com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT'
 
+    // CSV Reader
+    implementation 'com.github.doyaaaaaken:kotlin-csv-jvm:1.6.0' //for JVM platform
+
 
 
 }

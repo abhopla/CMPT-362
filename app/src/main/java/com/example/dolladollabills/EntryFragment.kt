@@ -1,6 +1,10 @@
 package com.example.dolladollabills
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,13 +12,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dolladollabills.db.category.*
 import com.example.dolladollabills.db.transaction.*
+import java.io.BufferedReader
+import java.io.File
+import java.io.InputStreamReader
 import java.text.SimpleDateFormat
 import java.util.*
+import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import kotlin.math.abs
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,6 +54,7 @@ private lateinit var typeSpin : Spinner
 private lateinit var amountEdit: EditText
 
 private var categoryList: MutableList<String> = mutableListOf()
+private var categoryMap: MutableMap<String, Long> = mutableMapOf()
 
 private var hour = -1
 private var minute = -1
@@ -49,6 +62,8 @@ private var year = -1
 private var month = -1
 private var date = -1
 private var spinnerPosition = 0
+
+private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
 
 /**
@@ -71,7 +86,61 @@ class EntryFragment : Fragment() {
         initializeDatabases()
         restoreSpinner(savedInstanceState)
 
-        Log.d("WHYYY", "create")
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                if (result.data?.data != null) {
+                    Log.d("WHYYY", result.data!!.data.toString())
+                    addCSVData(result.data!!.data!!)
+
+                }
+            }
+
+        }
+
+    }
+
+    private fun addCSVData(uri: Uri) {
+//        val inputStream = File(uri.path).inputStream()
+//
+//        val lineList = mutableListOf<String>()
+//
+//        inputStream.bufferedReader().forEachLine { lineList.add(it) }
+//        lineList.forEach{println(">  $it")}
+
+
+//        requireContext().contentResolver.openInputStream(uri).use { inputStream ->
+//            BufferedReader(
+//                InputStreamReader(Objects.requireNonNull(inputStream))
+//            ).use { reader ->
+//                var line = reader.readLine()
+//
+//                while (line != null) {
+//                    line = reader.readLine()
+//                }
+//            }
+//        }
+
+        val a = requireContext().contentResolver.openInputStream(uri)
+
+        var errorsFound = false
+        requireContext().contentResolver.openInputStream(uri)?.let {
+            csvReader().open(it) {
+                readAllAsSequence().forEach { row ->
+                    if (row.size == 4 || row[0] != "Category") {
+                        try {
+                            val category = row[0]
+                            var milliseconds = row[1].toLong()
+                            val amount = row[2].toDouble()
+                            val description = row[3]
+                            addTransaction(category, milliseconds, amount, description)
+                        } catch (e: Exception) {
+                            errorsFound = true
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
@@ -79,7 +148,6 @@ class EntryFragment : Fragment() {
         if (savedInstanceState != null) {
             spinnerPosition = savedInstanceState.getInt("spinner_value", spinnerPosition)
             if (typeSpin != null) {
-                Log.d("WHYYYY", "FUCKING HERE $spinnerPosition")
                 typeSpin.setSelection(spinnerPosition)
                 typeSpin.prompt
             }
@@ -94,7 +162,6 @@ class EntryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_entry, container, false)
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         finalizeViews(view)
-        Log.d("WHYYY", "createview")
         return view
     }
 
@@ -105,9 +172,10 @@ class EntryFragment : Fragment() {
 
         categoryViewModel.allCategoriesLiveData.observe(requireActivity()) { categories ->
             categoryList = mutableListOf()
+            categoryMap = mutableMapOf()
             for (category: Category in categories) {
                 categoryList.add(category.name)
-                Log.d("WHYYY", category.name)
+                categoryMap.put(category.name, category.id)
             }
             val dataAdapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, categoryList);
             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -128,9 +196,10 @@ class EntryFragment : Fragment() {
 
         val addCategoryButton: Button = view.findViewById(R.id.entry_add_category_button)
         addCategoryButton.setOnClickListener() { onAddCategoryClick(view) }
+
+        val csvImportButton: Button = view.findViewById(R.id.entry_csv_import_button)
+        csvImportButton.setOnClickListener() { onCSVImportClick(view) }
     }
-
-
 
     private fun initializeDatabases() {
         transactionDatabase = TransactionDatabase.getInstance(this.requireActivity())
@@ -200,63 +269,85 @@ class EntryFragment : Fragment() {
 
     private fun onSaveClick(view: View) {
         refreshDialogValues()
+
+        try {
+            val description = descriptionEdit.text.toString()
+            val amount = amountEdit.text.toString().toDouble()
+            val category = typeSpin.selectedItem.toString()
+            var milliseconds = 0L
+            val sdf = SimpleDateFormat("HH:mm MM dd yyyy")
+
+            if (hour == -1) {
+                if (year == -1) {
+                    milliseconds = Calendar.getInstance().timeInMillis
+                } else {
+                    var curHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).toString()
+                    var curMinute = Calendar.getInstance().get(Calendar.MINUTE).toString()
+
+                    val timeString = "$curHour:$curMinute $month $date $year"
+                    milliseconds = sdf.parse(timeString).time
+                }
+            } else if (year == -1) {
+                year = Calendar.getInstance().get(Calendar.YEAR)
+                month = (Calendar.getInstance().get(Calendar.MONTH) + 1)
+                date = Calendar.getInstance().get(Calendar.DATE)
+
+                val timeString = "$hour:$minute $month $date $year"
+                milliseconds = sdf.parse(timeString).time
+            } else {
+                val timeString = "$hour:$minute $month $date $year"
+                milliseconds = sdf.parse(timeString).time
+            }
+
+            addTransaction(category, milliseconds, amount, description)
+            addToast("Transaction added")
+        } catch(e: Exception) {
+            addToast("Error: Make sure all fields are filled before adding a transaction")
+        }
+    }
+
+    private fun addTransaction(categoryName: String, milliseconds: Long, amount: Double, description: String) {
         val transaction = Transaction()
 
-        val d = amountEdit.text.toString().toDouble()
-        val text = java.lang.Double.toString(Math.abs(d))
+        val text = abs(amount).toString()
         val integerPlaces = text.indexOf('.')
         val decimalPlaces = text.length - integerPlaces - 1
 
         if (decimalPlaces > 2) {
-            val toast = Toast.makeText(this.requireActivity(), "Error: Too many decimal places in amount", Toast.LENGTH_SHORT)
-            toast.show()
+            addToast("Error: Too many decimal places in amount")
             return
         }
 
-        transaction.amount = (amountEdit.text.toString().toDouble() * 100).toLong()
-        transaction.description = descriptionEdit.text.toString()
-        transaction.category_id = typeSpin.selectedItemPosition.toLong()
-
-        val sdf = SimpleDateFormat("HH:mm MM dd yyyy")
-
-        if (hour == -1) {
-            if (year == -1) {
-                transaction.milliseconds = Calendar.getInstance().timeInMillis
-            } else {
-                var curHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).toString()
-                var curMinute = Calendar.getInstance().get(Calendar.MINUTE).toString()
-
-                val timeString = "$curHour:$curMinute $month $date $year"
-                transaction.milliseconds = sdf.parse(timeString).time
-
-            }
-        } else if (year == -1) {
-
-            year = Calendar.getInstance().get(Calendar.YEAR)
-            month = (Calendar.getInstance().get(Calendar.MONTH) + 1)
-            date = Calendar.getInstance().get(Calendar.DATE)
-
-
-            val timeString = "$hour:$minute $month $date $year"
-            transaction.milliseconds = sdf.parse(timeString).time
-        } else {
-            val timeString = "$hour:$minute $month $date $year"
-            transaction.milliseconds = sdf.parse(timeString).time
+        if (categoryMap[categoryName] == null) {
+            val category = Category()
+            category.name = categoryName
+            categoryViewModel.insert(category)
+            Log.d("WHYYY", "Adding category")
+            Log.d("WHYYY", "category: $categoryName\n")
         }
 
-        Log.d("WHYYY", "year = $year")
-        Log.d("WHYYY", "month = $month")
-        Log.d("WHYYY", "date = $date")
-        Log.d("WHYYY", "hour = $hour")
-        Log.d("WHYYY", "minute = $minute")
+        val handler = Handler()
+        handler.postDelayed( {
+            transaction.amount = (amount * 100).toLong()
+            transaction.description = description
+            transaction.category_id = categoryMap.get(categoryName)!!
+            transaction.milliseconds = milliseconds
 
+            val categoryID = transaction.category_id
+            Log.d("WHYYY", "Adding transaction")
+            Log.d("WHYYY", "amount: $amount")
+            Log.d("WHYYY", "description: $description")
+            Log.d("WHYYY", "category: $categoryName")
+            Log.d("WHYYY", "category_id: $categoryID")
+            Log.d("WHYYY", "ms $milliseconds\n")
 
-        transactionViewModel.insert(transaction)
-        Log.d("check123",transaction.toString())
-        Log.d("check123",Date(transaction.milliseconds).month.toString())
+            transactionViewModel.insert(transaction)
+        }, 100)
 
+    }
 
-        val toast = Toast.makeText(this.requireActivity(), "Transaction added", Toast.LENGTH_SHORT)
+    private fun addToast(message: String) {
+        val toast = Toast.makeText(this.requireActivity(), message, Toast.LENGTH_SHORT)
         toast.show()
     }
 
@@ -268,6 +359,15 @@ class EntryFragment : Fragment() {
         dialog.show((activity as FragmentActivity).supportFragmentManager, "category dialog")
     }
 
+    private fun onCSVImportClick(view: View) {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "text/csv"
+        }
+
+        resultLauncher.launch(intent)
+    }
+
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
         super.onSaveInstanceState(savedInstanceState)
         refreshDialogValues()
@@ -277,7 +377,6 @@ class EntryFragment : Fragment() {
         savedInstanceState.putInt("month_value", month)
         savedInstanceState.putInt("date_value", date)
         savedInstanceState.putInt("spinner_value", typeSpin.selectedItemPosition)
-        Log.d("WHYYY", "saved")
     }
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
@@ -289,8 +388,6 @@ class EntryFragment : Fragment() {
             month = savedInstanceState.getInt("month_value", month)
             date = savedInstanceState.getInt("date_value", date)
         }
-
-        Log.d("WHYYY", "restored")
 
     }
 
