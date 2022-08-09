@@ -6,12 +6,28 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://www.jitpack.io'
+                    }
+
+        maven { url 'repo1.maven.org/maven2' }
+        maven {
+            url "https://nexus.veryfi.com/repository/maven-releases/"
+            credentials {
+                username = 'tlaruddo2'
+                password = 'cf515870c4360221f22cc82a02a1dd2f'
+            }
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
     }
+
+
 }
 rootProject.name = "dolladollabills"
 include ':app'
+include ':scanner'

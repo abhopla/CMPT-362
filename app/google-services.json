@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "514708756348",
+    "project_id": "upbeat-airway-356102",
+    "storage_bucket": "upbeat-airway-356102.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514708756348:android:3e0e18bee8eb8c432676f9",
+        "android_client_info": {
+          "package_name": "com.example.dolladollabills"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514708756348-2iai0ha7r9eubfjbopdkhab7h7s8up20.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dolladollabills",
+            "certificate_hash": "3ce5ea8ddefed0bbeaccee3d172f22c79a86e30a"
+          }
+        },
+        {
+          "client_id": "514708756348-e0bv5ejmlg622sq56t7ug5mplohrjja3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqwJOP62bUmNwHdD0qPjRus1bMiDb41eU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514708756348-e0bv5ejmlg622sq56t7ug5mplohrjja3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

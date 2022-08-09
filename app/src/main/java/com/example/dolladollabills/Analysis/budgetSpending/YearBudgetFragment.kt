@@ -41,8 +41,8 @@ class YearBudgetFragment : Fragment() {
     private var categoryList : MutableList<String> = mutableListOf()
 //    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8 >
 
-    private var budget : Long = 0
-    private var spending : Long = 0
+    private var budget : Double = 0.0
+    private var spending : Double = 0.0
     private var incomeId : Long = 11
 
     override fun onCreateView(
@@ -77,19 +77,21 @@ class YearBudgetFragment : Fragment() {
 
         transactionViewModel.allTransactionsLiveData.observe(requireActivity(), Observer { it ->
             Log.d(log,it.toString())
-            budget = 0
-            spending = 0
+            budget = 0.0
+            spending = 0.0
 
             //ex Date(transaction.milliseconds).month > August : 6
             //Date(transaction.milliseconds).month+ 2 August : 8
 
             for (transaction: Transaction in it){
                 if (transaction.category_id == incomeId ){
-                    budget += transaction.amount
+                    budget += transaction.amount / 100.0
                 }else{
-                    spending += transaction.amount
+                    spending += transaction.amount / 100.0
                 }
             }
+            budget = (budget * 100).toLong() / 100.0
+            spending = (spending * 100).toLong() / 100.0
 
             val aaChartView = binding.monthlyBudgetChart
             val aaChartModel : AAChartModel = AAChartModel()
