@@ -31,7 +31,9 @@
                 android:text="Transaction Description"
                 android:textSize="18sp"
                 android:layout_margin="10dp">
+
             </TextView>
+
 
             <EditText
                 android:id="@+id/entry_transaction_description_edit"

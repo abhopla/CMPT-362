@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 32
+    defaultConfig {
+        applicationId "com.veryfi.lens.receipts.demo"
+        minSdkVersion 21
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'VERYFI_CLIENT_ID', "\"${System.getenv("VERYFI_CLIENT_ID")}\""
+        buildConfigField 'String', 'VERYFI_USERNAME', "\"${System.getenv("VERYFI_USERNAME")}\""
+        buildConfigField 'String', 'VERYFI_API_KEY', "\"${System.getenv("VERYFI_API_KEY")}\""
+        buildConfigField 'String', 'VERYFI_URL', "\"${System.getenv("VERYFI_URL")}\""
+    }
+
+    androidResources {
+        noCompress "tflite"
+    }
+
+    buildFeatures {
+        viewBinding true
+        //compose true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
+//    composeOptions {
+//        kotlinCompilerExtensionVersion '1.1.1'
+//    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    namespace 'com.veryfi.lens.receipts.demo'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.veryfi.lens:veryfi-lens-receipts-sdk:1.5.7.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.github.martin-stone:hsv-alpha-color-picker-android:3.0.1'
+    implementation 'com.github.lriccardo:TimelineView:1.1.2'
+}

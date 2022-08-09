@@ -23,7 +23,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private lateinit var arrayList: ArrayList<Goal>
 
-private lateinit var listView: ListView
+lateinit var listView: ListView
 private lateinit var view: View
 private lateinit var goalbutton: Button
 private lateinit var goalViewmodel: GoalViewModel

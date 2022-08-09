@@ -16,6 +16,11 @@
         android2:summary="Link the Google Pay">
         <intent android2:action="your.action.string"/>
     </Preference>
+    <Preference android2:title="Receipt Scanner "
+        android2:summary="Link the Receipt Scanner">
+        <intent android2:targetPackage="com.example.dolladollabills"
+            android2:targetClass="com.example.dolladollabills.ReceiptScanner"/>/>
+    </Preference>
 
 
     <PreferenceCategory
@@ -48,9 +53,9 @@
     </PreferenceCategory>
 
     <Preference android2:title="Webpage"
-        android2:summary="https://www.sfu.ca/computing.html">
+        android2:summary="Access Our Website!!">
         <intent android2:action="android.intent.action.VIEW"
-            android2:data="https://www.sfu.ca/computing.html" />
+            android2:data="https://62d0e2b70194d.site123.me/" />
     </Preference>
 
 </PreferenceScreen>

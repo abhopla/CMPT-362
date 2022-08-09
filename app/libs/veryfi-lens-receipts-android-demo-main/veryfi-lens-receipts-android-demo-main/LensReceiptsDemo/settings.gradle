@@ -1,0 +1,38 @@
+pluginManagement {
+    repositories {
+
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven {
+            url System.getenv("https://nexus.veryfi.com/repository/maven-releases/")
+            credentials {
+                username = System.getenv("MAVEN_VERYFI_USERNAME")
+                password = System.getenv("MAVEN_VERYFI_PASSWORD")
+            }
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
+}
+dependencyResolutionManagement {
+    //repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven {
+            url System.getenv("MAVEN_VERYFI_URL")
+            credentials {
+                username = System.getenv("MAVEN_VERYFI_USERNAME")
+                password = System.getenv("MAVEN_VERYFI_PASSWORD")
+            }
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
+}
+rootProject.name = "LensReceiptsDemo"
+include ':app'
