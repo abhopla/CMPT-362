@@ -248,7 +248,7 @@ class EntryFragment : Fragment() {
     private fun onCSVImportClick(view: View) {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "text/csv"
+            type = "text/*"
         }
         resultLauncher.launch(intent)
     }
