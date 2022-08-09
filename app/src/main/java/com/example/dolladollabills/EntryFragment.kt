@@ -82,6 +82,7 @@ class EntryFragment : Fragment() {
     }
 
     private fun addCSVData(uri: Uri) {
+        var addedTransactions = false
         var errorsFound = false
         requireContext().contentResolver.openInputStream(uri)?.let {
             csvReader().open(it) {
@@ -93,6 +94,7 @@ class EntryFragment : Fragment() {
                             val amount = row[2].toDouble()
                             val description = row[3]
                             addTransaction(category, milliseconds, amount, description)
+                            addedTransactions = true
                         } catch (e: Exception) {
                             errorsFound = true
                         }
@@ -110,6 +112,7 @@ class EntryFragment : Fragment() {
                             val amount = row[6].toDouble()
                             val description = row[7]
                             addTransaction(category, milliseconds, amount, description)
+                            addedTransactions = true
                         } catch (e: Exception) {
                             errorsFound = true
                         }
@@ -118,7 +121,9 @@ class EntryFragment : Fragment() {
             }
         }
 
-        if (errorsFound) {
+        if (addedTransactions == false) {
+            addToast("No transactions added, check your file")
+        } else if (errorsFound) {
             addToast("Added transactions, but errors in the CSV were found for some rows")
         } else {
             addToast("Added transactions")
@@ -248,7 +253,7 @@ class EntryFragment : Fragment() {
     private fun onCSVImportClick(view: View) {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
-            type = "text/csv"
+            type = "text/*"
         }
         resultLauncher.launch(intent)
     }
