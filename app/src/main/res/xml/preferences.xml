@@ -8,13 +8,8 @@
         android2:title="Account Preferences">
     </PreferenceCategory>
 
-
-    <Preference android2:title="CSV "
-        android2:summary="import CSV for bank statments">
-        <intent android2:action="your.action.string"/>
-    </Preference>
     <Preference android2:title="Receipt Scanner "
-        android2:summary="Link the Receipt Scanner">
+        android2:summary="Import an Image of a Receiptr">
         <intent android2:targetPackage="com.example.dolladollabills"
             android2:targetClass="com.example.dolladollabills.ReceiptScanner"/>/>
     </Preference>

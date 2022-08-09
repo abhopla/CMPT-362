@@ -8,158 +8,59 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!-- TODO: Update blank fragment layout -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="50dp"
+                android:gravity="center"
                 android:text="Transaction Entry"
-                tools:ignore="MissingConstraints"
-                android:textSize="25dp"
-                android:layout_margin="10dp">
-            </TextView>
+                android:textSize="30dp"
+                android:textStyle="bold"
+                tools:ignore="MissingConstraints"></TextView>
 
-            <TextView
-                android:id="@+id/entry_transaction_description_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Transaction Description"
-                android:textSize="18sp"
-                android:layout_margin="10dp">
-
-            </TextView>
-
-
-            <EditText
-                android:id="@+id/entry_transaction_description_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:hint="Purchase">
-
-            </EditText>
 
             <TextView
                 android:id="@+id/entry_transaction_type_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Transaction Type"
+                android:text="Import Transactions by File"
                 android:textSize="18sp">
 
             </TextView>
-
-
-            <Spinner
-                android:id="@+id/entry_transaction_type_spin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:focusable="false">
-            </Spinner>
-
-
-
-            <TextView
-                android:id="@+id/entry_transaction_amount_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Amount"
-                android:textSize="18sp"
-                android:layout_margin="10dp">
-            </TextView>
-
-            <EditText
-                android:id="@+id/entry_transaction_amount_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:hint="Amount"
-                android:inputType="number">
-
-            </EditText>
-
-            <TextView
-                android:id="@+id/entry_date_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date and Time"
-                android:textSize="18sp"
-                android:layout_margin="10dp">
-            </TextView>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp" >
+                android:orientation="vertical"
+                android:layout_marginBottom="30dp">
                 <Button
-                    android:id="@+id/entry_date_button"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/entry_csv_import_button"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Date">
-                </Button>
-
-                <Button
-                    android:id="@+id/entry_time_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Time"
-                    android:layout_weight="1">
-
-                </Button>
+                    android:text="CSV Import"></Button>
 
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Submit Transaction"
-                android:textSize="18sp"
-                android:layout_margin="10dp">
-            </TextView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp">
-                <Button
-                    android:id="@+id/entry_save_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Save">
-                </Button>
-
-                <Button
-                    android:id="@+id/entry_add_category_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add Category"
-                    android:layout_weight="1">
-
-                </Button>
-            </LinearLayout>
+                android:layout_margin="10dp"
+                android:text="Add Transaction Manually"
+                android:textSize="18sp"></TextView>
 
             <Button
-                android:id="@+id/entry_csv_import_button"
-                android:layout_width="wrap_content"
+                android:id="@+id/manual_add_transaction"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="CSV Import"
-                android:layout_weight="1">
-            </Button>
+                android:layout_weight="1"
+                android:text="Manually Add Transaction"></Button>
 
         </LinearLayout>
     </ScrollView>

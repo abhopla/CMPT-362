@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     package="com.example.dolladollabills">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -11,6 +12,9 @@
         android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    package="com.example.dolladollabills" >
+
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -24,6 +28,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dolladollabills"
+
         tools:targetApi="31"
         tools:replace="android:fullBackupContent">
         <meta-data
@@ -42,6 +47,15 @@
 
         </activity>
         <!-- <meta-data -->
+
+        tools:targetApi="31" >
+        <activity
+            android:name=".ManualTransactionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReceiptScanner"
+            android:exported="false" /> <!-- <meta-data -->
+
         <!-- android:name="com.google.android.gms.wallet.api.enabled" -->
         <!-- android:value="true" /> -->
         <!-- <activity -->
@@ -52,8 +66,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Dolladollabills.NoActionBar">
-<!--            android:theme="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"-->
+            android:theme="@style/Theme.Dolladollabills.NoActionBar" >
+
+            <!-- android:theme="@style/MaterialAlertDialog.MaterialComponents.Title.Icon" -->
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

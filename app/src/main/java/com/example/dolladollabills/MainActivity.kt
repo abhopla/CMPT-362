@@ -71,14 +71,20 @@ class MainActivity : AppCompatActivity() {
             ), drawerLayout
         )
         binding.appBarMain.fab.setOnClickListener { view ->
-            val intent= Intent()
-            intent.action=Intent.ACTION_SEND
-            var lastItem = goalsArr.lastIndex
-            println("DEBUG my goals ${goalsArr[lastItem]}")
-            println("DEBUG full array ${goalsArr}")
-            intent.putExtra(Intent.EXTRA_TEXT,"New Goal: ${goalsArr[lastItem]}")
-            intent.type="text/plain"
-            startActivity(Intent.createChooser(intent,"Share To:"))
+            if(goalsArr.isEmpty()){
+                Snackbar.make(view, "Please make a goal first", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+            }else{
+                val intent= Intent()
+                intent.action=Intent.ACTION_SEND
+                var lastItem = goalsArr.lastIndex
+                println("DEBUG my goals ${goalsArr[lastItem]}")
+                println("DEBUG full array ${goalsArr}")
+                intent.putExtra(Intent.EXTRA_TEXT,"New Goal: ${goalsArr[lastItem]}")
+                intent.type="text/plain"
+                startActivity(Intent.createChooser(intent,"Share To:"))
+
+            }
         }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
