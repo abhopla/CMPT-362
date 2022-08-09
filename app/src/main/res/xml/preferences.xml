@@ -8,12 +8,9 @@
         android2:title="Account Preferences">
     </PreferenceCategory>
 
-    <Preference android2:title="Name, Email, Class, etc"
-        android2:summary="UserProfile">
-        <intent android2:action="your.action.string"/>
-    </Preference>
-    <Preference android2:title="Google Pay "
-        android2:summary="Link the Google Pay">
+
+    <Preference android2:title="CSV "
+        android2:summary="import CSV for bank statments">
         <intent android2:action="your.action.string"/>
     </Preference>
     <Preference android2:title="Receipt Scanner "

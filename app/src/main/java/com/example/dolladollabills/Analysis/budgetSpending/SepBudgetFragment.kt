@@ -42,8 +42,8 @@ class SepBudgetFragment : Fragment() {
 //    private val currentMonth = LocalDateTime.now().month.value //ex. AUGUST = 8 >
     private val currentMonth = 9 //Sep
 
-    private var budget : Long = 0
-    private var spending : Long = 0
+    private var budget : Double = 0.0
+    private var spending : Double = 0.0
     private var incomeId : Long = 11
 
     override fun onCreateView(
@@ -78,18 +78,18 @@ class SepBudgetFragment : Fragment() {
 
         transactionViewModel.allTransactionsLiveData.observe(requireActivity(), Observer { it ->
             Log.d(log,it.toString())
-            budget = 0
-            spending = 0
+            budget = 0.0
+            spending = 0.0
 
             //ex Date(transaction.milliseconds).month > August : 6
             //Date(transaction.milliseconds).month+ 2 August : 8
 
             for (transaction: Transaction in it){
-                if (Date(transaction.milliseconds).month+2 == currentMonth){
+                if (Date(transaction.milliseconds).month+1 == currentMonth){
                     if (transaction.category_id == incomeId ){
-                        budget += transaction.amount
+                        budget += transaction.amount / 100.0
                     }else{
-                        spending += transaction.amount
+                        spending += transaction.amount / 100.0
                     }
                 }
 

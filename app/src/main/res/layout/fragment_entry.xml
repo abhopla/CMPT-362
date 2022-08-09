@@ -153,6 +153,14 @@
                 </Button>
             </LinearLayout>
 
+            <Button
+                android:id="@+id/entry_csv_import_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CSV Import"
+                android:layout_weight="1">
+            </Button>
+
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
