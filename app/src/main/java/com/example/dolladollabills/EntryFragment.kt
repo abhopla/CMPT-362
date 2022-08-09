@@ -96,6 +96,23 @@ class EntryFragment : Fragment() {
                         } catch (e: Exception) {
                             errorsFound = true
                         }
+                    } else if (row.size == 8 && row[0] != "Category") {
+                        try {
+                            val sdf = SimpleDateFormat("HH:mm MM dd yyyy")
+                            val category = row[0]
+                            val year = row[1].toInt()
+                            val month = row[2].toInt()
+                            val date = row[3].toInt()
+                            val hour = row[4].toInt()
+                            val minute = row[5].toInt()
+                            val timeString = "$hour:$minute $month $date $year"
+                            val milliseconds = sdf.parse(timeString).time
+                            val amount = row[6].toDouble()
+                            val description = row[7]
+                            addTransaction(category, milliseconds, amount, description)
+                        } catch (e: Exception) {
+                            errorsFound = true
+                        }
                     }
                 }
             }
