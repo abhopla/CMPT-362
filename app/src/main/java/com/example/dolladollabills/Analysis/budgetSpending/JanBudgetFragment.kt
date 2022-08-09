@@ -96,6 +96,8 @@ class JanBudgetFragment : Fragment() {
                 }
 
             }
+            budget = (budget * 100).toLong() / 100.0
+            spending = (spending * 100).toLong() / 100.0
 
             val aaChartView = binding.monthlyBudgetChart
             val aaChartModel : AAChartModel = AAChartModel()
